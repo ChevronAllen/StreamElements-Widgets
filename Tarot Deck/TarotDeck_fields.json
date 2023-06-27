@@ -1,0 +1,107 @@
+{
+    "rollCondition": {
+      "type": "dropdown",
+      "label": "Draw Card On:",
+      "group": "Events",
+      "value": "rollOnLoad",
+      "options": {
+        "rollOnLoad": "On Widget Load"
+      }
+    },
+    "NumCardsToDraw": {
+      "type": "slider",
+      "label": "Cards to Draw",
+      "group": "Events",
+      "value": 1,
+      "min":1,
+      "max":3
+    },
+    "cardAnimationIntensity": {
+      "type": "slider",
+      "label": "Card Movement",
+      "group": "Card Animation",
+      "value": 2,
+      "min": 1,
+      "max":5,
+      "step":0.2
+    },
+    "CardAppearanceDelay1": {
+      "type": "slider",
+      "label": "Card 1 Delay",
+      "group": "Card Animation",
+      "value": 1,
+      "min":0,
+      "max":10,
+      "step":0.25
+    },
+    "CardAppearanceDelay2": {
+      "type": "slider",
+      "label": "Card 2 Delay",
+      "group": "Card Animation",
+      "value": 1,
+      "min":0,
+      "max":10,
+      "step":0.25
+    },
+    "CardAppearanceDelay3": {
+      "type": "slider",
+      "label": "Card 3 Delay",
+      "group": "Card Animation",
+      "value": 1,
+      "min":0,
+      "max":10,
+      "step":0.25
+    },
+    "titleFontSize": {
+      "type": "slider",
+      "label": "Title Font Size:",
+      "group": "Font",
+      "value": 30,
+      "min":15,
+      "max":50,
+      "step":5
+    },
+    "descriptionFontSize": {
+      "type": "slider",
+      "label": "Description Font Size:",
+      "group": "Font",
+      "value": 30,
+      "min":5,
+      "max":30,
+      "step":5
+    },
+    "allowMinorArcana": {
+      "type": "checkbox",
+      "label": "Allow Minor Arcana",
+      "group": "Deck Settings",
+      "value": true
+    },
+    "allowReversedCards": {
+      "type": "checkbox",
+      "label": "Allow Reversed Cards",
+      "group": "Deck Settings",
+      "value": true
+    },
+    "reversedProbability": {
+      "type": "slider",
+      "label": "Reversed Card Probability",
+      "group": "Deck Settings",
+      "value": 5,
+      "min":0,
+      "max":100
+      
+    },
+    "showUprightFlair": {
+      "type": "checkbox",
+      "label": "Show Upright Flair",
+      "group": "Deck Settings",
+      "value": true
+    },
+    "showReversedFlair": {
+      "type": "checkbox",
+      "label": "Show Reversed Flair",
+      "group": "Deck Settings",
+      "value": true
+    }
+  }
+  

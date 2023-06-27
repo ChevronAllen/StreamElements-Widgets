@@ -1,0 +1,471 @@
+/*
+    Original by Zaytri
+    Modified for DiceQueenDi by: Cirnoble
+*/
+
+/* --- [Globals] --- */
+
+* {
+    font-family: '{customFont}', '{googleFont}', Nunito, Arial, sans-serif;
+    font-size: {fontSize}px;
+    overflow-wrap: break-word;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* --- [Widget Container] --- */
+  
+  main {
+    --customBorderColor: {borderColor};
+    --customNameColor: {nameColor};
+    --customBackgroundColor: {backgroundColor};
+    --customTextColor: {textColor};
+    --customDiceWidth:60px;
+    --bubbleLife: {lifetime};
+    --bubblePadding: {padding}px;
+    --bubbleMaxWidth:{maxWidth}px;
+    --bubbleMaxHeight:{maxHeight}px;
+    --diceSize:{diceSize}px;
+    color: black;
+    box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    padding: var(--bubblePadding);
+  }
+  
+  main.preview-true::before {
+    --borderSize: 10px;
+    display:inline-block;
+    content: '';
+    position: absolute;
+    height: calc(100% - {padding}px * 2);
+    width: calc(100% - {padding}px * 2);
+    top: calc({padding}px - var(--borderSize));
+    left: calc({padding}px - var(--borderSize));
+    border: var(--borderSize) dashed white;
+    box-shadow: 0 0 5px #000;
+    background-color: #0008;
+    z-index: -2;
+  }
+  
+  main.preview-true::after {
+    --borderSize: 10px;
+    --space: 10px;
+    display:inline-block;
+    content: 'Messages will only appear within this area.\a\a Drag and resize the widget to change the area.\a\"Space from Widget Edges\" in \"Bubble Styles\" also affects this area.\a\a Change \"Preview Mode\" to remove this message';
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    width: calc(100% - ({padding}px + var(--space)) * 2);
+    top: 30%;
+    left: calc({padding}px + var(--space));
+    text-align: center;
+    padding: 30px 0;
+    text-shadow: 0 0 5px black;
+    white-space: pre;
+    font-weight: bold;
+    font-family: Roboto, Arial, sans-serif;
+    z-index: -1;
+  }
+  
+  main.preview-true::before, main.preview-true::after {
+    animation: fade .4s reverse forwards;
+  }
+  
+  main.dark-mode { color: white; }
+  
+  main.custom-message-colors { color: var(--customTextColor) }
+  
+  /* --- [Bubble Container] --- */
+  
+  .bubble {
+    /*visibility: hidden;*/
+    margin-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding-right: 50px !important;  
+    max-width: var(--bubbleMaxWidth);
+    max-height: var(--bubbleMaxHeight);
+  }
+  
+  .corner-diagonal .bubble {
+    --topRightCorner: calc(var(--cornerSize) - var(--borderSize));
+    --bottomLeftCorner: calc(var(--cornerSize) / 2);
+    --bottomRightCorner: calc(var(--cornerSize) / 2);
+  /*
+    -webkit-mask:
+      linear-gradient( 135deg, transparent 0 var(--topLeftCorner, 0),     white 0) top left,
+      linear-gradient(-135deg, transparent 0 var(--topRightCorner, 0),    white 0) top right,
+      linear-gradient(  45deg, transparent 0 var(--bottomLeftCorner, 0),  white 0) bottom left,
+      linear-gradient( -45deg, transparent 0 var(--bottomRightCorner, 0), white 0) bottom right
+    ;
+    -webkit-mask-size: 51% 51%;
+    -webkit-mask-repeat: no-repeat;
+    overflow: hidden;
+  */
+    padding: var(--borderSize);
+    
+  }
+  
+  .corner-round .bubble, .corner-square .bubble {
+    border: var(--borderSize) solid var(--borderColor);
+  }
+  
+  .corner-round .bubble {
+    border-radius: 10px;
+  }
+  
+  .custom-border-colors .bubble {
+    --borderColor: var(--customBorderColor);
+  }
+  
+  .custom-message-colors .bubble {
+    --backgroundColor: var(--customBorderColor);
+  }
+  
+  .bubble.animate {
+    visibility: visible;
+  }
+  
+  .bubble.dynamic {
+    animation: pop .5s calc({lifetime}s - .5s) forwards;
+  }
+  
+  .bubble.fade {
+    animation:
+      fade reverse .5s,
+      fade .5s calc({lifetime}s - .5s) forwards;
+  }
+  
+  .bubble.fade-up {
+    animation:
+      fade reverse .5s,
+      fade .5s calc({lifetime}s - .5s) forwards,
+        up .5s,
+        up reverse .5s calc({lifetime}s - .5s) forwards
+    ;
+  }
+  
+  .bubble.fade-down {
+    animation:
+      fade reverse .5s,
+      fade .5s calc({lifetime}s - .5s) forwards,
+        down .5s,
+        down reverse .5s calc({lifetime}s - .5s) forwards
+    ;
+  }
+  
+  .bubble.fade-left {
+    animation:
+      fade reverse .5s,
+      fade .5s calc({lifetime}s - .5s) forwards,
+        left .5s,
+        left reverse .5s calc({lifetime}s - .5s) forwards
+    ;
+  }
+  
+  .bubble.fade-right {
+    animation:
+      fade reverse .5s,
+      fade .5s calc({lifetime}s - .5s) forwards,
+        right .5s,
+        right reverse .5s calc({lifetime}s - .5s) forwards
+    ;
+  }
+  
+  /*.bubble.zoom {
+    animation:
+      pop reverse .5s,
+      pop .5s calc({lifetime}s - .5s) forwards
+    ;
+  }
+  */
+  .bubble.zoomIn{
+    animation: 0.5s linear scaleIn forwards, 0.5s linear calc({lifetime}s - .5s) scaleOut forwards;
+  }
+  /*.bubble.zoomOut{
+    animation: scaleOut .5s calc(5s - .5s) forward ;
+  }*/
+  
+  .bubble-background {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--backgroundColor);
+  }
+  
+  .corner-diagonal .bubble-background {
+    background:
+      linear-gradient( 0deg,   var(--borderColor) calc(var(--borderSize) + 1px), transparent 0),
+      linear-gradient( 90deg,  var(--borderColor) calc(var(--borderSize) + 1px), transparent 0),
+      linear-gradient( 180deg, var(--borderColor) calc(var(--borderSize) + 1px), transparent 0),
+      linear-gradient( 270deg, var(--borderColor) calc(var(--borderSize) + 1px), transparent 0),
+      linear-gradient( 135deg, var(--borderColor) 0 calc(var(--topLeftCorner, 0px) + var(--borderSize)),     transparent 0) top left     / 50% 50%,
+      linear-gradient(-135deg, var(--borderColor) 0 calc(var(--topRightCorner, 0px) + var(--borderSize)),    transparent 0) top right    / 50% 50%,
+      linear-gradient(  45deg, var(--borderColor) 0 calc(var(--bottomLeftCorner, 0px) + var(--borderSize)),  transparent 0) bottom left  / 50% 50%,
+      linear-gradient( -45deg, var(--borderColor) 0 calc(var(--bottomRightCorner, 0px) + var(--borderSize)), transparent 0) bottom right / 50% 50%,
+      var(--backgroundColor)
+    ;
+    background-origin: border-box;
+    background-repeat: no-repeat;
+  }
+  
+  .corner-round .bubble-background {
+    border-radius: 5px;
+  }
+  
+  
+  .dark-mode .bubble { --defaultBackgroundColor: #000B; }
+  
+  
+  
+  /* --- [Container Blocks] --- */
+  
+  .username-box {
+    z-index: 3;
+    align-self: flex-start;
+  }
+  
+  .username {
+    text-shadow:2px 0 3px var(--userColor),0 2px 3px var(--userColor),-2px 0 3px var(--userColor),0 -2px 3px var(--userColor);
+    color: #ffffff;
+    font-weight: bold;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-bottom: -3px;
+    display: inline-block;
+    font-size: {userNameFontSize}px;
+  }
+  
+  .custom-border-colors .username {
+    color: var(--customNameColor);
+    text-shadow: 0 1px 0 #0004;
+  }
+  
+  .message {
+    top: calc(({fontSize}px/2) * -1);
+    position: relative;
+    background-color: #ebebeb;
+    border-radius: 15px;
+    padding: 5px 10px;
+    max-height: {maxHeight}px;
+    margin-left: 15px;
+    max-width: calc(100% - 15px);
+    align-self: flex-start;
+    margin-bottom: -7px;
+    z-index: 2;
+  }
+  
+  .message-wrapper {
+    max-height: {maxHeight}px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    position: relative;
+    -webkit-line-clamp: {maxLines};
+    -webkit-box-orient: vertical;
+    font-weight: bold;
+  }
+  
+  .dynamic .message { animation: expand 2s; }
+  
+  /* --- [Message Dice] --- */
+  
+  .dice-container{
+    --diceFontSize:{diceFontSize}px;
+    display:inline-block;
+    position:absolute;
+    right: -40px;
+    width:var(--diceSize);
+    height:var(--diceSize);
+    z-index:100;
+  }
+  .dice-container.critical{
+    --dice-color: linear-gradient(130deg, rgba(244,245,44,1) 21%, rgba(235,234,166,1) 29%, rgba(224,203,33,1) 39%, rgba(224,203,33,1) 51%, rgba(239,235,41,1) 69%, rgba(235,234,166,1) 81%, rgba(244,245,44,1) 86%) 100% 100% / 900% 900%;
+    --dice-img: url({diceImageCritical});
+    color:black;
+    text-shadow: 0px 0px 10px white;
+    -webkit-text-stroke: 1px black;
+    -moz-text-stroke: 1px black;
+    text-stroke: 1px black;
+  }
+  .dice-container.fumble{
+    --dice-color: linear-gradient(-45deg, rgba(186,21,21,1) 20%, rgba(255,122,98,1) 30%, rgba(186,21,21,1) 75%) 100% 100% / 900% 900%;
+    --dice-img: url({diceImageFumble});
+    color:white;
+    text-shadow: 0px 0px 10px black;
+    -webkit-text-stroke: 1px white;
+    -moz-text-stroke: 1px white;
+    text-stroke: 1px white;
+  }
+  .dice-container.normal{
+    --dice-color:#6C6;
+    --dice-img: url({diceImageNormal});
+    color:black;
+    text-shadow: 0px 0px 10px gold;
+    -webkit-text-stroke: 1px black;
+    -moz-text-stroke: 1px black;
+    text-stroke: 1px black;
+  }
+  
+  .dice-container .hexagon{
+    background-image: var(--dice-img);
+    background-size: contain;
+    width:100%;
+    height:100%;
+  }
+  
+  .dice-container span{
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height:100%;
+    padding-top:calc(({diceSize}px/2) - (var(--diceFontSize) / 2));
+    font-family: {diceFont};
+    font-size:calc(var(--diceFontSize));
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  /* --- [Message Parts] --- */
+  
+  .text {
+    text-shadow: 0 1px 0 #fff;
+  }
+  
+  .emote {
+    position: relative;
+    vertical-align: middle;
+    margin: -.25rem 0;
+  }
+  
+  .dynamic .text, .dynamic .emote { animation: fadeMessage 1.5s; }
+  
+  .emote-1 { height: calc({fontSize}px * 1.25); }
+  .emote-2 { height: calc({fontSize}px * 2); }
+  .emote-4 { height: calc({fontSize}px * 4); }
+  
+  /* --- [Message Types] --- */
+  
+  .highlight .message {
+    background: linear-gradient(-45deg, #ffadaddd, #ffd6a5dd, #fdffb6dd, #caffbfdd, #a0c4ffdd, #bdb2ffdd, #ffc6ffdd, #ffadaddd, #ffd6a5dd) 100% 100% / 900% 900%;
+    animation: gradientShift 5s infinite linear;
+  }
+  
+  .highlight .message:before {
+    border: 0;
+  }
+  
+  .message-stroke .message {
+    box-shadow:2px 0 3px var(--userColor),0 2px 3px var(--userColor),-2px 0 3px var(--userColor),0 -2px 3px var(--userColor);
+  }
+  
+  .corner-diagonal .highlight .bubble-background {
+    background:
+      linear-gradient( 0deg,   var(--borderColor) calc(var(--borderSize) + .1px), transparent 0),
+      linear-gradient( 90deg,  var(--borderColor) calc(var(--borderSize) + .1px), transparent 0),
+      linear-gradient( 180deg, var(--borderColor) calc(var(--borderSize) + .1px), transparent 0),
+      linear-gradient( 270deg, var(--borderColor) calc(var(--borderSize) + .1px), transparent 0),
+      linear-gradient( 135deg, var(--borderColor) 0 calc(var(--topLeftCorner, 0px) + var(--borderSize)),     transparent 0) top left     / 50% 50%,
+      linear-gradient(-135deg, var(--borderColor) 0 calc(var(--topRightCorner, 0px) + var(--borderSize)),    transparent 0) top right    / 50% 50%,
+      linear-gradient(  45deg, var(--borderColor) 0 calc(var(--bottomLeftCorner, 0px) + var(--borderSize)),  transparent 0) bottom left  / 50% 50%,
+      linear-gradient( -45deg, var(--borderColor) 0 calc(var(--bottomRightCorner, 0px) + var(--borderSize)), transparent 0) bottom right / 50% 50%,
+      linear-gradient(-45deg, #ffadaddd, #ffd6a5dd, #fdffb6dd, #caffbfdd, #9bf6ffdd, #a0c4ffdd, #bdb2ffdd, #ffc6ffdd, #ffadaddd, #ffd6a5dd) 100% 100% / 900% 900%
+    ;
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    animation: gradientShift-cornerDiagonal 5s infinite linear;
+  }
+  
+  .highlight .text {
+    color: black;
+  }
+  
+  .action .text {
+    font-style: italic;
+  }
+  
+  .action .emote {
+    transform: skew(-5deg);
+  }
+  
+  /* --- [Animations] --- */
+  
+  @keyframes gradientShift-cornerDiagonal {
+    from { background-position: 0 0, 0 0, 0 0, 0 0, top left, top right, bottom left, bottom right, 100% 100%; }
+    to { background-position: 0 0, 0 0, 0 0, 0 0, top left, top right, bottom left, bottom right, 0 0; }
+  }
+  
+  @keyframes gradientShift {
+    from { background-position: 100% 100%; }
+    to { background-position: 0 0; }
+  }
+  
+  @keyframes pop {
+    20% { transform: scale(1.3); }
+    to { opacity: 0; transform: scale(0); }
+  }
+  
+  @keyframes fadeMessage {
+    0%, 30% { opacity: 0; }
+  }
+  
+  @keyframes fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  @keyframes up {
+    from { transform: translateY(50px); }
+    to { transform: translateY(0px); }
+  }
+  
+  @keyframes down {
+    from { transform: translateY(-50px); }
+    to { transform: translateY(0px); }
+  }
+  
+  @keyframes left {
+    from { transform: translateX(50px); }
+    to { transform: translateX(0px); }
+  }
+  
+  @keyframes right {
+    from { transform: translateX(-50px); }
+    to { transform: translateX(0px); }
+  }
+  
+  @keyframes expand {
+    0% {
+      width: 0;
+      max-height: 0;
+    }
+  
+    10% { width: calc(var(--dynamicWidth) * 1.75); }
+  
+    30% {
+      width: var(--dynamicWidth);
+      max-height: 0;
+    }
+    70% { max-height: {maxHeight}px; }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0); }
+    80%  { transform: scale(1.3); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes scaleOut {
+    from { opacity: 1; transform: scale(1); }
+    20% { transform: scale(1.3); }
+    to { opacity: 0; transform: scale(0); }
+  }

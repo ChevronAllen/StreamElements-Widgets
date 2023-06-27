@@ -1,0 +1,239 @@
+{
+    "delay": {
+        "type": "number",
+        "label": "Delay (seconds)",
+      	"group": "Timing",
+        "value": 0
+    },
+    "duration": {
+        "type": "number",
+        "label": "Duration (seconds)",
+      	"group": "Timing",
+        "value": 30
+    },
+  	"titleDuration": {
+        "type": "number",
+        "label": "Title Duration",
+      	"group": "Timing",
+        "value": 5
+    },
+    "title": {
+        "type": "text",
+        "label": "Title Text",
+      	"group": "Title",
+        "value": "The stream has ended"
+    },
+    "titleSize": {
+        "type": "number",
+        "label": "Title Font Size",
+       	"group": "Title",
+        "value": 60
+    },
+    "titleFontName": {
+        "type": "googleFont",
+        "label": "Title Font",
+       	"group": "Title",
+        "value": "Roboto"
+    },
+    "titleColor": {
+        "type": "colorpicker",
+        "label": "Title Color",
+       	"group": "Title",
+        "value": "rgba(255,255,255,1)"
+    },
+  	"titleOutlineColor": {
+        "type": "colorpicker",
+        "label": "Title Outline Color",
+       	"group": "Title",
+        "value": "rgba(255,255,255,1)"
+    },
+  	"titleOutlineWidth": {
+        "type": "number",
+        "label": "Title Outline Width",
+       	"group": "Title",
+        "value": 2
+    },
+  	"listSize": {
+        "type": "slider",
+        "label": "Number of List Items",
+       	"group": "List Appearance", 
+        "value": 5,
+      	"min": 3,
+      	"max": 8,
+      	"step": 1
+    },
+    "labelSize": {
+        "type": "number",
+        "label": "Section Label Font Size",
+       	"group": "List Appearance", 
+        "value": 40
+    },
+    "labelFontName": {
+        "type": "googleFont",
+        "label": "Label Font",
+       	"group": "List Appearance",
+        "value": "Roboto"
+    },    
+  	"labelColor": {
+        "type": "colorpicker",
+        "label": "Label Color",
+       	"group": "List Appearance",
+        "value": "rgba(255,255,255,1)"
+    },
+  	"labelOutlineColor": {
+        "type": "colorpicker",
+        "label": "Label Outline Color",
+       	"group": "List Appearance",
+        "value": "rgba(255,255,255,1)"
+    },
+  	"labelOutlineWidth": {
+        "type": "number",
+        "label": "List Outline Width",
+       	"group": "List Appearance",
+        "value": 2
+    },
+  	"usernameFontName": {
+        "type": "googleFont",
+        "label": "Username Font",
+       	"group": "List Appearance",
+        "value": "Roboto"
+    },
+    "usernameFontColor": {
+        "type": "colorpicker",
+        "label": "Username Font Color",
+       	"group": "List Appearance",
+        "value": "rgba(255,255,255,1)"
+    },
+  	"usernameOutlineColor": {
+        "type": "colorpicker",
+        "label": "Username Outline Color",
+       	"group": "List Appearance",
+        "value": "rgba(0,0,0,1)"
+    },
+    "usernameOutlineWidth": {
+        "type": "number",
+        "label": "Username Outline Color",
+        "group": "List Appearance",
+        "value": 1
+    },
+  	"usernameFontSize": {
+        "type": "number",
+        "label": "Username font size",
+       	"group": "List Appearance",
+        "value": 24
+    },
+  	"sectionShadowColor": {
+        "type": "colorpicker",
+        "label": "Shadow Color",
+      	"group": "List Appearance",
+        "value": "rgba(0,0,0,1)"
+    },
+    "enablefollower": {
+        "type": "checkbox",
+        "label": "Enable Followers",
+       	"group": "Followers",
+        "value": true
+    },
+    "followLabel": {
+        "type": "textfield",
+        "label": "Followers label",
+       	"group": "Followers",
+        "value": "Followers"
+    },
+    "enablesubscriber": {
+        "type": "checkbox",
+        "label": "Enable Subscribers",
+       	"group": "Subscribers",
+        "value": true
+    },
+    "subLabel": {
+        "type": "textfield",
+        "label": "Sub label",
+       	"group": "Subscribers",
+        "value": "Subscribers"
+    },
+  	"enablecustom": {
+        "type": "checkbox",
+        "label": "Enable Custom",
+       	"group": "Custom Credits",
+        "value": true
+    },
+    "customCreditsHeader": {
+        "type": "text",
+        "label": "Custom Credits Header",
+       	"group": "Custom Credits",
+        "value": "Special Thanks"
+    },
+    "customCredits": {
+        "type": "text",
+        "label": "Custom Credits (comma seperated)",
+       	"group": "Custom Credits",
+        "value": ""
+    },
+  	"enablemods": {
+        "type": "checkbox",
+        "label": "Enable Moderators",
+       	"group": "Custom Credits",
+        "value": true
+    },
+    "modsLabel": {
+        "type": "text",
+        "label": "Mod Label",
+       	"group": "Custom Credits",
+        "value": "Moderators"
+    },
+    "modCredits": {
+        "type": "text",
+        "label": "Mods (comma seperated)",
+       	"group": "Custom Credits",
+        "value": ""
+    },
+  	"enablepatreon": {
+        "type": "checkbox",
+        "label": "Enable Patreon",
+       	"group": "Custom Credits",
+        "value": true
+    },
+    "patreonLabel": {
+        "type": "text",
+        "label": "Patreon Label",
+       	"group": "Custom Credits",
+        "value": "Patrons"
+    },
+    "patreonCredits": {
+        "type": "text",
+        "label": "Patreon Credits (comma seperated)",
+       	"group": "Custom Credits",
+        "value": ""
+    },
+    "enabletip": {
+        "type": "checkbox",
+        "label": "Enable tips",
+       	"group": "Tips & Cheers",
+        "value": true
+    },
+    "tipMinimum": {
+        "type": "number",
+        "label": "Minimum Tip",
+      	"group": "Tips & Cheers",
+        "value": 5
+    },
+    "enablecheer": {
+        "type": "checkbox",
+        "label": "Enable Cheers",
+      	"group": "Tips & Cheers",
+        "value": true
+    },
+  	"cheerMinimum": {
+        "type": "number",
+        "label": "Minimum Cheer",
+      	"group": "Tips & Cheers",
+        "value": 100
+    },
+  	"donationLabel": {
+        "type": "textfield",
+        "label": "Tip label",
+      	"group": "Tips & Cheers",
+        "value": "Donators"
+    }
+}

@@ -1,0 +1,109 @@
+*{
+    overflow: hidden;
+    box-sizing: border-box;
+    letter-spacing: 1.3px;
+  }
+  #app #title{
+    text-align: center;
+    font-size: {{titleSize}}px;
+    font-family: {{titleFontName}}, sans-serif;
+    font-weight:bold;
+    color: {{titleColor}};
+    -webkit-text-fill-color: {{titleColor}}; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: {{titleOutlineWidth}}px;
+    -webkit-text-stroke-color: {{titleOutlineColor}};
+  }
+  
+  .credits-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .block{
+    position:absolute;
+    opacity:0;
+    text-align:center;
+    min-width:20%;
+    min-height:40%;
+    filter: drop-shadow(25px 4px 10px {{sectionShadowColor}});
+  }
+  .block label{
+    display:inline-block;
+    width:100%;
+    border-bottom:3px solid black;
+    text-align:center;
+    font-family: '{{labelFontName}}', sans-serif;
+    font-size:  {{labelSize}}px;
+    font-weight: bold;
+    color: {{labelColor}};
+    -webkit-text-fill-color: {{labelColor}}; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: {{labelOutlineWidth}}px;
+    -webkit-text-stroke-color: {{labelOutlineColor}};
+  }
+  .block > div{
+    text-align:inherit;
+    font-family: '{{usernameFontName}}', sans-serif;
+    font-size:  {{usernameFontSize}}px;
+    color: {{usernameFontColor}};
+    -webkit-text-fill-color: {{usernameFontColor}}; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: {{usernameOutlineWidth}}px;
+    -webkit-text-stroke-color: {{usernameOutlineColor}};
+  }
+  
+  .position-top-right-1{
+    top:20%;
+    right:20%;
+  }
+  .position-top-right-2{
+    top:25%;
+    right:25%;
+  }
+  .position-top-right-3{
+    top:20%;
+    right:30%;
+  }
+  .position-top-left-1{
+    top:20%;
+    left:20%;
+  }
+  .position-top-left-2{
+    top:25%;
+    left:25%;
+  }
+  .position-top-left-3{
+    top:20%;
+    left:30%;
+  }
+  .position-bottom-right-1{
+    bottom:20%;
+    right:20%;
+  }
+  .position-bottom-right-2{
+    bottom:25%;
+    right:25%;
+  }
+  .position-bottom-right-3{
+    bottom:20%;
+    right:30%;
+  }
+  .position-bottom-left-1{
+    bottom:20%;
+    left:20%;
+  }
+  .position-bottom-left-2{
+    bottom:25%;
+    left:25%;
+  }
+  .position-bottom-left-3{
+    bottom:20%;
+    left:30%;
+  }
+  .position-special{
+    top:20%;
+    right:30%;
+  }
+  
+  
